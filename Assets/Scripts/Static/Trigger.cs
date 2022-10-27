@@ -18,6 +18,12 @@ public class Trigger : MonoBehaviour
     public delegate void good();
     public static good goodEnd;
 
+    public FirstPersonController fps;
+    public AudioClip fs2;
+    public AudioClip fs3;
+
+    public delegate void LimpCont();
+    public static LimpCont stopLimp;
     private void Start()
     {
         
@@ -50,8 +56,6 @@ public class Trigger : MonoBehaviour
                             normEnd.Invoke();
                             break;
                     }
-                    staticStuff.goodFlags = 0;
-                    staticStuff.badFlags = 0;
                 }
 
                 switch (staticStuff.badFlags + staticStuff.goodFlags)
@@ -89,7 +93,10 @@ public class Trigger : MonoBehaviour
                     case 5:
                         if (staticStuff.runSoured)
                         {
-                            beg.ResetController("Seems you're lacking a toe, my darling. Surely you didn't s':tr%^aaaa#}'*^y. Oh well, grandmother must have her basket. We'll simply have to replace it. Come here...");
+                            stopLimp();
+                            beg.ResetController("Seems you're lacking a toe, my darling. Surely you didn't s':tr%^aaaa#}'*^y. Oh well, grandmother must have her basket.");
+                            fps.m_FootstepSounds[1] = fs2;
+                            fps.m_FootstepSounds[2] = fs3;
                         }
                         else
                         {
@@ -111,6 +118,7 @@ public class Trigger : MonoBehaviour
                     case 7:
                         if (staticStuff.runSoured)
                         {
+                            stopLimp();
                             beg.ResetController("Blind and foolish child.");
                         }
                         else

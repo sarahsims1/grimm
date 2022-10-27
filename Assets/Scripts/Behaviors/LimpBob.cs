@@ -20,7 +20,7 @@ public class LimpBob : MonoBehaviour
         limpBob.enabled = false;
 
         stepmomevent.limpStart += StartTheLimp;
-        Beginning.stopLimp += StopTheLimp;
+        Trigger.stopLimp += StopTheLimp;
     }
 
     public void StartTheLimp()

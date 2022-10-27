@@ -372,7 +372,7 @@ namespace Doublsb.Dialog
                     SEAudio.PlayOneShot(chatSound);
                 }
             }
-
+            SEAudio.pitch = 1f;
             _current_Data.PrintText += _current_Data.Format.CloseTagger;
         }
 

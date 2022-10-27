@@ -23,6 +23,8 @@ namespace Doublsb.Dialog
         [SerializeField]
         private FirstPersonController fps;
 
+        public MusicChange ms;
+
         //Checks if player is in range
         private bool inRange;
 
@@ -49,7 +51,7 @@ namespace Doublsb.Dialog
             {
                 //This event indicates that the dialog is almost over.
                 DialogManager.DialogFin += Deactivate;
-
+                StartCoroutine(ms.ChangeMusicFade("none", 1f));
                 fps.Frozen(true);
                 dialog.SetActive(true);
                 dialogObject.SetActive(true);

@@ -14,6 +14,11 @@ namespace Menus
         public LevelLoad levelLoad;
         private bool onOptions;
 
+        private void Start()
+        {
+            mainButtons.SetActive(true);
+            optionsStuff.SetActive(false);
+        }
         public void Play()
         {
             levelLoad.Load("Main");

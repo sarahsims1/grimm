@@ -10,7 +10,13 @@ public class gothelFall : MonoBehaviour
 
     public AudioSource auds;
 
+    public AudioSource auds2; 
+
     public AudioClip jumpScare;
+
+    public AudioClip fall;
+
+    public AudioClip tinitus;
 
     public GameObject fps;
 
@@ -29,6 +35,8 @@ public class gothelFall : MonoBehaviour
     private bool fade;
 
     int counter;
+
+    public MusicChange ms;
     void Start()
     {
         anime = GetComponent<Animator>();
@@ -42,13 +50,9 @@ public class gothelFall : MonoBehaviour
             auds.PlayOneShot(jumpScare);
             counter++;
         }
-            if (anime.GetCurrentAnimatorClipInfo(0)[0].clip.name.Equals("jumpScareStop") && counter == 1)
+        if (anime.GetCurrentAnimatorClipInfo(0)[0].clip.name.Equals("jumpScareStop") && counter == 1)
         {
             GetComponent<MeshRenderer>().enabled = false;
-            fps.SetActive(false);
-            startCam.SetActive(false);
-            cam.SetActive(true);
-            cam.GetComponent<Animator>().SetBool("fall", true);
             counter++;
             StartCoroutine(FallingDown());
         }
@@ -70,15 +74,20 @@ public class gothelFall : MonoBehaviour
         fade = true;
         color.a = 1;
         black.GetComponent<Image>().color = color;
-        yield return new WaitForSecondsRealtime(0.5f);
+        yield return new WaitForSecondsRealtime(1f);
+        fps.SetActive(false);
+        startCam.SetActive(false);
+        cam.SetActive(true);
+        cam.GetComponent<Animator>().SetBool("fall", true);
         fade = false;
         yield return new WaitForSecondsRealtime(2f);
         black.SetActive(true);
-        fps.GetComponent<AudioSource>().volume = 0;
+        auds2.PlayOneShot(fall);
         fade = true;
         color.a = 1;
         black.GetComponent<Image>().color = color;
         yield return new WaitForSecondsRealtime(4);
+        fps.GetComponent<AudioSource>().volume = 0;
         fps.SetActive(true);
         fps.GetComponent<FirstPersonController>().enabled = true;
         startCam.SetActive(true);
@@ -95,5 +104,9 @@ public class gothelFall : MonoBehaviour
         fade = false;
         yield return new WaitForSecondsRealtime(1);
         fps.GetComponent<AudioSource>().volume = 1;
+        auds2.clip = tinitus;
+        auds2.Play();
+        StartCoroutine(ms.ChangeMusicFade("worse", 1f));
+        auds2.loop = true;
     }
 }
