@@ -10,45 +10,37 @@ public class LevelLoad : MonoBehaviour
     public Slider slidy;
     private Color color;
     private string level;
+    int counter = 0;
 
     private bool loading;
-    private bool fadeIn;
-    public float fadeSpeed = 1f;
 
-    private void Start()
-    {
+    private void Awake()
+    {     
+        loading = false;
+        lr.enabled = true;
+        loadScreen.gameObject.SetActive(false);
+        slidy.gameObject.SetActive(false);
         color = loadScreen.color;
-        color.a = 0;
-        loadScreen.color = color;
     }
     public void Load(string level)
     {
-        StartCoroutine(LoadAsync(level));
+        this.level = level;
         lr.enabled = false;
         loadScreen.gameObject.SetActive(true);
         slidy.gameObject.SetActive(true);
-        fadeIn = true;
+        loading = true;
+        color.a = 1f;
+        loadScreen.color = color;
     }
 
     private void Update()
     {
-        if(fadeIn)
-        {
-            color.a += fadeSpeed * Time.deltaTime;
-            loadScreen.color = color;
-        }
-        if(loading)
+        if(loading && counter == 0)
         { 
             AsyncOperation operation = SceneManager.LoadSceneAsync(level);
             float progress = Mathf.Clamp01(operation.progress / .9f);
             slidy.value = progress;
+            counter++;
         }
-    }
-
-    IEnumerator LoadAsync(string level)
-    {
-        yield return new WaitUntil(() => loadScreen.color.a > 0.99f);
-        this.level = level;
-        loading = true;
     }
 }

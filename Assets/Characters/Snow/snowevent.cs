@@ -31,6 +31,10 @@ public class snowevent : MonoBehaviour
 
     public FirstPersonController fps;
 
+    public MusicChange ms;
+
+    public AudioClip whispers;
+
     public float fadeTime = 1;
     private void Start()
     {
@@ -64,6 +68,7 @@ public class snowevent : MonoBehaviour
             fps.Frozen(false);
             runFade = true;
             StartCoroutine(ChaseScene());
+            StartCoroutine(ms.ChangeMusicFade(whispers, 1f));
         }
     }
 

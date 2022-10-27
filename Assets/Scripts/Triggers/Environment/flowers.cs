@@ -61,7 +61,7 @@ public class flowers : MonoBehaviour
         if(fade == false)
         {
             graphic.gameObject.SetActive(false);
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
         if (other.tag.Equals("Player"))
         {
