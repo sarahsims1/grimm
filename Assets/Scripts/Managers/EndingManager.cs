@@ -19,13 +19,14 @@ public class EndingManager : MonoBehaviour
     private Color color;
     public TMP_Text text;
 
+    public static int whichEnding = 1;
     bool fade;
     void Start()
     {
         color = text.color;
         color.a = 0f;
         text.color = color;
-        switch (staticStuff.goodFlags)
+        switch (whichEnding)
         {
             case 3:
                 reallyBadImage.SetActive(true);
@@ -34,19 +35,22 @@ public class EndingManager : MonoBehaviour
                 auds.PlayOneShot(bad);
                 StartCoroutine(displayText("Ending 3/3"));
                 break;
-            case 8:
+            case 1:
                 reallyBadImage.SetActive(false);
                 badImage.SetActive(false);
                 goodImage.SetActive(true);
                 auds.PlayOneShot(good);
                 StartCoroutine(displayText("Ending 1/3"));
                 break;
-            default:
+            case 2:
                 reallyBadImage.SetActive(false);
                 badImage.SetActive(true);
                 goodImage.SetActive(false);
                 auds.PlayOneShot(nirmal);
                 StartCoroutine(displayText("Ending 2/3"));
+                break;
+            default:
+                StartCoroutine(displayText("You've broken the game. I don't know how you got here", 18f));
                 break;
         }
     }

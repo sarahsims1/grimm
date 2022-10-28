@@ -40,7 +40,10 @@ public class TowerTalk : MonoBehaviour
         Talk.talking += ShowYourself;
         hair.SetActive(false);
     }
-
+    private void OnDisable()
+    {
+        Talk.talking -= ShowYourself;
+    }
     private void Update()
     {
         if(climb)

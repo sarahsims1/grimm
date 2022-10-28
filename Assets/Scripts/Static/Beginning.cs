@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityStandardAssets.Characters.FirstPerson;
 using UnityEngine.UI;
 
 public class Beginning : MonoBehaviour
@@ -26,6 +27,8 @@ public class Beginning : MonoBehaviour
 
     public CharPathManage cpm;
 
+    public Brightness bright;
+
     public bool teleportToStart;
 
     private Color color;
@@ -37,6 +40,12 @@ public class Beginning : MonoBehaviour
     }
     public void ResetController(string text)
     {
+<<<<<<< Updated upstream
+=======
+        resetting = true;
+        bright.UpdateLighting();
+        ms.ResetMusic();
+>>>>>>> Stashed changes
         cpm.Restart();
         stopLimp();
         eGraphic.SetActive(true);
@@ -46,13 +55,20 @@ public class Beginning : MonoBehaviour
             controller.transform.position = defalt;
             cam.transform.parent = controller.transform;
             cam.transform.localPosition = new Vector3(0, 0.8f, 0);
+            controller.GetComponent<FirstPersonController>().Frozen(true);
         }
         StartCoroutine(MomsTalking(text));
     }
 
     private IEnumerator MomsTalking(string momText)
     {
+<<<<<<< Updated upstream
         bool ready = false;
+=======
+        image.SetActive(true);
+        color.a = 1;
+        image.GetComponent<Image>().color = color;
+>>>>>>> Stashed changes
         for (int i = 0; i < momText.Length; i++)
         {
             text.gameObject.SetActive(true);
@@ -65,15 +81,38 @@ public class Beginning : MonoBehaviour
             yield return new WaitForSecondsRealtime(0.05f);
             if(momText.Length - 1 == i)
             {
+<<<<<<< Updated upstream
                 ready = true;
+=======
+                text.gameObject.SetActive(true);
+                text.text = text.text + momText[i];
+                auds.pitch = UnityEngine.Random.Range(0.8f, 1.2f);
+                auds.PlayOneShot(momSound);
+                yield return new WaitForSecondsRealtime(0.04f);
+                if (momText.Length - 1 == i)
+                {
+                    ready = true;
+                }
+>>>>>>> Stashed changes
             }
         }
 
         yield return new WaitUntil(() => ready == true);
+<<<<<<< Updated upstream
+=======
+        text.text = momText;
+
+>>>>>>> Stashed changes
         yield return new WaitForSecondsRealtime(3);
         text.text = "";
         text.gameObject.SetActive(false);
         color.a = 0;
         image.GetComponent<Image>().color = color;
+<<<<<<< Updated upstream
+=======
+        controller.GetComponent<FirstPersonController>().Frozen(false);
+        ready = false;
+        resetting = false;
+>>>>>>> Stashed changes
     }
 }

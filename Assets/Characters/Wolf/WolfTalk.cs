@@ -18,6 +18,11 @@ public class WolfTalk : MonoBehaviour
     {
         Talk.talking += ShowYourself;
     }
+
+    private void OnDisable()
+    {
+        Talk.talking -= ShowYourself;
+    }
     private void ShowYourself()
     {
 

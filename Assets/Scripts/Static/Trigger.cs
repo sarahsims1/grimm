@@ -38,16 +38,22 @@ public class Trigger : MonoBehaviour
                     switch (staticStuff.goodFlags)
                     {
                         case 3:
+                            EndingManager.whichEnding = 3;
                             Debug.Log("Bad Ending");
                             badEnding.Invoke();
+                            staticStuff.endHasBeenGot = true;
                             break;
                         case 8:
                             Debug.Log("Good Ending");
+                            EndingManager.whichEnding = 1;
                             goodEnd.Invoke();
+                            staticStuff.endHasBeenGot = true;
                             break;
                         default:
+                            EndingManager.whichEnding = 2;
                             Debug.Log("Normal");
                             normEnd.Invoke();
+                            staticStuff.endHasBeenGot = true;
                             break;
                     }
                     staticStuff.goodFlags = 0;

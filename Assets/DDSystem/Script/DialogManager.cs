@@ -91,6 +91,10 @@ namespace Doublsb.Dialog
         {
             EPressed += Click_Window;
         }
+        private void OnDisable()
+        {
+            EPressed -= Click_Window;
+        }
         public void Show(DialogData Data)
         {
             _current_Data = Data;
@@ -143,10 +147,9 @@ namespace Doublsb.Dialog
 
         private void Update()
         {
-            if(Input.GetKeyDown(KeyCode.E))
+            if(Input.GetKeyDown(KeyCode.E) && EPressed !=null)
             {
-                EPressed.Invoke();
-               
+                EPressed.Invoke();              
             }
         }
         #endregion

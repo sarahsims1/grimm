@@ -13,6 +13,10 @@ public class FrogTalk : MonoBehaviour
     {
         TalkFrog.talking += ShowYourself;
     }
+    private void OnDisable()
+    {
+        Talk.talking -= ShowYourself;
+    }
     private void ShowYourself()
     {
         staticStuff.runSoured = true;

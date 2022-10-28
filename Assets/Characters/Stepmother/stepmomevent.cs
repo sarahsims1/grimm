@@ -37,10 +37,15 @@ public class stepmomevent : MonoBehaviour
     public GameObject epop;
     private void Start()
     {
+        LimpBob.stepmomActive = true;
         stme = gameObject.GetComponent<stepmomevent>();
         color = black.color;
     }
 
+    private void OnDisable()
+    {
+        LimpBob.stepmomActive = false;
+    }
     private void Update()
     {
         if(fade && color.a < 1)

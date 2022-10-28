@@ -15,6 +15,9 @@ public static class staticStuff
     //bool to keep track of whether run is good
     public static bool runSoured;
 
+    //Is true if at least one ending has been found
+    public static bool endHasBeenGot;
+
 
     public static int getRuns()
     {

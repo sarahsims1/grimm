@@ -16,6 +16,11 @@ public class StepMomTalk : MonoBehaviour
     {
         Talk.talking += ShowYourself;
     }
+
+    private void OnDisable()
+    {
+        Talk.talking -= ShowYourself;
+    }
     private void ShowYourself()
     {
         staticStuff.runSoured = true;
@@ -32,16 +37,21 @@ public class StepMomTalk : MonoBehaviour
         Talk.selectActive = true;
 
         dialogTexts.Add(Text1);
-
-        DialogManager.Show(dialogTexts);
+        if (DialogManager != null)
+        {
+            DialogManager.Show(dialogTexts);
+        }
     }
 
     private void Update()
     {
-        if (DialogManager._current_Data.PrintText.Equals("On") && counter == 0)
+        if (DialogManager != null)
         {
-            stepmomevent.Begin();
-            counter++;
+            if (DialogManager._current_Data.PrintText.Equals("On") && counter == 0)
+            {
+                stepmomevent.Begin();
+                counter++;
+            }
         }
     }
     private void Check_Response()

@@ -14,6 +14,19 @@ namespace Menus
         public LevelLoad levelLoad;
         private bool onOptions;
 
+<<<<<<< Updated upstream
+=======
+        public GameObject toggle;
+
+        private void Start()
+        {
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
+            mainButtons.SetActive(true);
+            if (staticStuff.endHasBeenGot) toggle.SetActive(true); else toggle.SetActive(false);
+            optionsStuff.SetActive(false);
+        }
+>>>>>>> Stashed changes
         public void Play()
         {
             levelLoad.Load("Main");
@@ -36,6 +49,11 @@ namespace Menus
                 optionsStuff.SetActive(true);
                 onOptions = true;
             }
+        }
+
+        public void SprintToggle(bool lightning)
+        {
+            FirstPersonController.lightningSpeedActive = lightning;
         }
         public void AdjustSensitiivty(float newsens)
         {

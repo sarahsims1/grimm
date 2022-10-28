@@ -42,14 +42,21 @@ public class epop : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag.Equals("Frog") || other.tag.Equals("character"))
+        if (other.tag.Equals("Frog"))
+        {
+            offSet = 4;
+            currentChar = other.gameObject;
+            e.transform.parent = currentChar.transform;
+            e.transform.localPosition = new Vector3(offSet, 0, 0);
+        }
+        if (other.tag.Equals("character"))
         {
             offSet = 3;
             currentChar = other.gameObject;
             e.transform.parent = currentChar.transform;
             e.transform.localPosition = new Vector3(offSet, 0, 0);
         }
-        if(other.tag.Equals("tower"))
+        if (other.tag.Equals("tower"))
         {
             offSet = 0;
             currentChar = other.gameObject;
