@@ -31,6 +31,8 @@ namespace Doublsb.Dialog
         //Checks if the game is ready to redo dialogue
         private bool ready = true;
 
+        private bool done;
+
         //Events
         public delegate void TalkEvents();
         public static event TalkEvents talking;
@@ -47,7 +49,7 @@ namespace Doublsb.Dialog
         //Activates objects and raises event when player presses E. Set's ready to false so player doesn't keep restarting dialog.
         private void Update()
         {
-            if (inRange && Input.GetKeyDown(KeyCode.E)&&ready==true)
+            if (inRange && Input.GetKeyDown(KeyCode.E)&&ready==true && done==false)
             {
                 //This event indicates that the dialog is almost over.
                 DialogManager.DialogFin += Deactivate;
@@ -80,6 +82,7 @@ namespace Doublsb.Dialog
         //This deactivates everything and sets ready to true. It was suprsingly hard to make the system restart the dialog after finishing it once.
         IEnumerator Deactivate()
         {
+            done = true;
             yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.E));
             yield return new WaitForSeconds(0.01f);
             yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.E));
@@ -88,7 +91,7 @@ namespace Doublsb.Dialog
             HopModified.StartTheHop();
             dialogObject.SetActive(false);
             dialog.SetActive(false);
-            ready = true;
+            ready = true;  
         }
     }
 }

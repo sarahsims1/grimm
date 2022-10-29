@@ -46,7 +46,7 @@ public class MusicChange : MonoBehaviour
             case 0:
                 if (staticStuff.goodFlags == 1)
                 {
-                    StartCoroutine(ChangeMusicFade("none", 1f));
+                    StartCoroutine(ChangeMusicFade("none", 0.5f));
                 }
                 else
                 {
@@ -57,7 +57,9 @@ public class MusicChange : MonoBehaviour
             case 1:
                 StartCoroutine(ChangeMusicFade("uhoh", 1f));
                 break;
-
+            case 2:
+                StartCoroutine(ChangeMusicFade("bad", 1f));
+                break;
             case 3:
                 StartCoroutine(ChangeMusicFade("bad", 1f));
                 break;
@@ -78,6 +80,7 @@ public class MusicChange : MonoBehaviour
         this.fadeSpeed = fadeSpeed;
         fade = true;
         yield return new WaitUntil(() => auds.volume == 0);
+        yield return new WaitForSeconds(1f);
         switch(which)
         {
             case "regular":

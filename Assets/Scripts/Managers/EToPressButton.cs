@@ -12,19 +12,15 @@ namespace Doublsb.Dialog
     {
 
         private bool ready;
-        // Start is called before the first frame updat
 
         public void OnSelect(BaseEventData eventData)
         {
             ready = true;
-            Debug.Log("Selected!");
         }
         public void OnDeselect(BaseEventData eventData)
         {
             ready = false;
-            Debug.Log("Deselected!");
         }
-        // Update is called once per frame
         void Update()
         {
             if (ready == true && Input.GetKeyDown(KeyCode.E))

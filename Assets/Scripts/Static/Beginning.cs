@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityStandardAssets.Characters.FirstPerson;
 using UnityEngine.UI;
 
 public class Beginning : MonoBehaviour
@@ -24,6 +25,8 @@ public class Beginning : MonoBehaviour
 
     public CharPathManage cpm;
 
+    public Brightness bright;
+
     public bool teleportToStart;
 
     private Color color;
@@ -36,11 +39,12 @@ public class Beginning : MonoBehaviour
     private void Start()
     {
         defalt = dealf;
-        ResetController("Good morning darling! Here, take this basket. Your grandmother is sick, take her this bread and wine to make her feel better. Take care not to stray off the path, go straight there and back.");     
+        ResetController("Good morning darling! Here, take this basket. Your grandmother is sick, take her this bread and wine to make her feel better. Follow the path and don't stray, go straight there and back.");     
     }
     public void ResetController(string text)
     {
         resetting = true;
+        bright.UpdateLighting();
         ms.ResetMusic();
         cpm.Restart();
         cam.GetComponent<DrunkScript>().enabled = false;
@@ -52,6 +56,7 @@ public class Beginning : MonoBehaviour
             controller.transform.position = defalt;
             cam.transform.parent = controller.transform;
             cam.transform.localPosition = new Vector3(0, 0.8f, 0);
+            controller.GetComponent<FirstPersonController>().Frozen(true);
         }
         StartCoroutine(MomsTalking(text));
     }
@@ -65,15 +70,15 @@ public class Beginning : MonoBehaviour
         }
     }
     private IEnumerator MomsTalking(string momText)
-    {      
+    {
+        image.SetActive(true);
+        color.a = 1;
+        image.GetComponent<Image>().color = color;
         for (int i = 0; i < momText.Length; i++)
         {
             if (ready == false)
             {
                 text.gameObject.SetActive(true);
-                image.SetActive(true);
-                color.a = 1;
-                image.GetComponent<Image>().color = color;
                 text.text = text.text + momText[i];
                 auds.pitch = UnityEngine.Random.Range(0.8f, 1.2f);
                 auds.PlayOneShot(momSound);
@@ -87,11 +92,13 @@ public class Beginning : MonoBehaviour
 
         yield return new WaitUntil(() => ready == true);
         text.text = momText;
+
         yield return new WaitForSecondsRealtime(3);
         text.text = "";
         text.gameObject.SetActive(false);
         color.a = 0;
         image.GetComponent<Image>().color = color;
+        controller.GetComponent<FirstPersonController>().Frozen(false);
         ready = false;
         resetting = false;
     }
