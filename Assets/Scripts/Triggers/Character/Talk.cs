@@ -46,6 +46,10 @@ namespace Doublsb.Dialog
             dialog.SetActive(false);
         }
 
+        private void OnDisable()
+        {
+            DialogManager.DialogFin -= Deactivate;
+        }
         //Activates objects and raises event when player presses E. Set's ready to false so player doesn't keep restarting dialog.
         private void Update()
         {

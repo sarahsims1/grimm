@@ -14,9 +14,16 @@ namespace Menus
         public LevelLoad levelLoad;
         private bool onOptions;
 
+        public GameObject toggle;
+        public GameObject toggleSuper;
+
         private void Start()
         {
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
             mainButtons.SetActive(true);
+            if (staticStuff.endHasBeenGot) toggle.SetActive(true); else toggle.SetActive(false);
+            if (staticStuff.twoEndsHaveBeenGot) toggleSuper.SetActive(true); else toggleSuper.SetActive(false);
             optionsStuff.SetActive(false);
         }
         public void Play()
@@ -41,6 +48,16 @@ namespace Menus
                 optionsStuff.SetActive(true);
                 onOptions = true;
             }
+        }
+
+        public void SprintToggle(bool lightning)
+        {
+            FirstPersonController.lightningSpeedActive = lightning;
+        }
+
+        public void SprintToggleSuper(bool lightning)
+        {
+            FirstPersonController.superLightningSpeedActive = lightning;
         }
         public void AdjustSensitiivty(float newsens)
         {

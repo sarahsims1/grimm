@@ -43,6 +43,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private bool m_Jumping;
         private AudioSource m_AudioSource;
 
+        public static bool lightningSpeedActive = false;
+        public static bool superLightningSpeedActive = false;
         public static float mouseSensitivity = 2;
 
         // Use this for initialization
@@ -76,7 +78,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
             else
             {
-                SetRunSpeed(11);
+                if (superLightningSpeedActive) SetRunSpeed(100); else if (lightningSpeedActive) SetRunSpeed(30); else SetRunSpeed(11);
                 SetWalkSpeed(6);
                 MouseLook.YSensitivity = mouseSensitivity;
                 MouseLook.XSensitivity = mouseSensitivity;
@@ -84,7 +86,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         }
         private void Start()
         {
-            
+            if (superLightningSpeedActive) SetRunSpeed(100); else if (lightningSpeedActive) SetRunSpeed(30); else SetRunSpeed(11);
             MouseLook.YSensitivity = mouseSensitivity;
             MouseLook.XSensitivity = mouseSensitivity;
             m_CharacterController = GetComponent<CharacterController>();
@@ -112,7 +114,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
             if (!m_PreviouslyGrounded && m_CharacterController.isGrounded)
             {
-                StartCoroutine(m_JumpBob.DoBobCycle());
                 PlayLandingSound();
                 m_MoveDir.y = 0f;
                 m_Jumping = false;

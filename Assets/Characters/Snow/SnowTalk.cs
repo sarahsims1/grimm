@@ -13,7 +13,10 @@ public class SnowTalk : MonoBehaviour
     {
         Talk.talking += ShowYourself;
     }
-
+    private void OnDisable()
+    {
+        Talk.talking -= ShowYourself;
+    }
     private void Update()
     {
         if (DialogManager._current_Data.PrintText.Equals("Do"))
