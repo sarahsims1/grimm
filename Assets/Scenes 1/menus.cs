@@ -14,9 +14,8 @@ namespace Menus
         public LevelLoad levelLoad;
         private bool onOptions;
 
-<<<<<<< Updated upstream
-=======
         public GameObject toggle;
+        public GameObject toggleSuper;
 
         private void Start()
         {
@@ -24,9 +23,9 @@ namespace Menus
             Cursor.visible = true;
             mainButtons.SetActive(true);
             if (staticStuff.endHasBeenGot) toggle.SetActive(true); else toggle.SetActive(false);
+            if (staticStuff.twoEndsHaveBeenGot) toggleSuper.SetActive(true); else toggleSuper.SetActive(false);
             optionsStuff.SetActive(false);
         }
->>>>>>> Stashed changes
         public void Play()
         {
             levelLoad.Load("Main");
@@ -54,6 +53,11 @@ namespace Menus
         public void SprintToggle(bool lightning)
         {
             FirstPersonController.lightningSpeedActive = lightning;
+        }
+
+        public void SprintToggleSuper(bool lightning)
+        {
+            FirstPersonController.superLightningSpeedActive = lightning;
         }
         public void AdjustSensitiivty(float newsens)
         {

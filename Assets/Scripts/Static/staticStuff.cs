@@ -17,6 +17,7 @@ public static class staticStuff
 
     //Is true if at least one ending has been found
     public static bool endHasBeenGot;
+    public static bool twoEndsHaveBeenGot;
 
 
     public static int getRuns()

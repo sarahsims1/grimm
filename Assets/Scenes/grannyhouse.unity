@@ -284,7 +284,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &115372602
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -747,6 +747,7 @@ MonoBehaviour:
   momSound: {fileID: 8300000, guid: b8efe2dd074e3df4abb03989e81c948b, type: 3}
   dealf: {x: 250.1, y: 36.6, z: 21.7}
   start: 0
+  ms: {fileID: 0}
   text: {fileID: 0}
   image: {fileID: 0}
   controller: {fileID: 308749428}
@@ -1186,7 +1187,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!135 &360856464
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -7016,7 +7017,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &801011088
 Transform:
   m_ObjectHideFlags: 0
@@ -7364,7 +7365,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &958200609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8617,11 +8618,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ccc304c2d0d04a4f85b3bd2b8313f4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< Updated upstream
-  debugEnabled: 0
-=======
   debugEnabled: 1
->>>>>>> Stashed changes
   goodFlag: 3
   badFlags: 0
   normalRun: 0
@@ -9049,12 +9046,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   granwolf: {fileID: 360856462}
   scaryMat: {fileID: 2100000, guid: dabab7ae9bb6afa41ac7e0722e8c567a, type: 2}
-  player: {fileID: 1356245640}
+  player: {fileID: 308749428}
   spped: 0.05
   DialogManager: {fileID: 1612609872}
   Example: []
   time: 5
   black: {fileID: 1499894195}
+  auds: {fileID: 308749433}
+  js: {fileID: 8300000, guid: 5cc0fa18925b23f458f79e6ed031985a, type: 3}
+  epop: {fileID: 381979427}
 --- !u!1 &1851369052 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -1018664272722485354, guid: fa952a6b62e813b4fb51a850448d1505, type: 3}

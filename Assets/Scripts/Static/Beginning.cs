@@ -13,6 +13,7 @@ public class Beginning : MonoBehaviour
     public static Vector3 defalt;
     public Vector3 dealf;
     public bool start;
+    public MusicChange ms;
 
     public TMP_Text text;
     public GameObject image;
@@ -22,9 +23,6 @@ public class Beginning : MonoBehaviour
 
     public GameObject eGraphic;
 
-    public delegate void LimpCont();
-    public static LimpCont stopLimp;
-
     public CharPathManage cpm;
 
     public Brightness bright;
@@ -33,22 +31,25 @@ public class Beginning : MonoBehaviour
 
     private Color color;
 
+    bool ready = false;
+
+    bool resetting;
+
+    float wait = 3;
     private void Start()
     {
         defalt = dealf;
-        ResetController("Good morning darling! Here, take this basket. Your grandmother is sick, take her this bread and wine to make her feel better. Take care not to stray off the path, go straight there and back.");
+        ResetController("Good morning darling! Here, take this basket. Your grandmother is sick, take her this bread and wine to make her feel better. Follow the path and don't stray, go straight there and back.");     
     }
     public void ResetController(string text)
     {
-<<<<<<< Updated upstream
-=======
         resetting = true;
         bright.UpdateLighting();
         ms.ResetMusic();
->>>>>>> Stashed changes
         cpm.Restart();
-        stopLimp();
+        cam.GetComponent<DrunkScript>().enabled = false;
         eGraphic.SetActive(true);
+        wait = 3;
         if (teleportToStart)
         {
             cam.transform.parent = null;
@@ -60,30 +61,23 @@ public class Beginning : MonoBehaviour
         StartCoroutine(MomsTalking(text));
     }
 
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.E) && resetting)
+        {
+            ready = true;
+            wait = wait - 1;
+        }
+    }
     private IEnumerator MomsTalking(string momText)
     {
-<<<<<<< Updated upstream
-        bool ready = false;
-=======
         image.SetActive(true);
         color.a = 1;
         image.GetComponent<Image>().color = color;
->>>>>>> Stashed changes
         for (int i = 0; i < momText.Length; i++)
         {
-            text.gameObject.SetActive(true);
-            image.SetActive(true);
-            color.a = 1;
-            image.GetComponent<Image>().color = color;
-            text.text = text.text + momText[i];
-            auds.pitch = UnityEngine.Random.Range(0.8f, 1.2f);
-            auds.PlayOneShot(momSound);
-            yield return new WaitForSecondsRealtime(0.05f);
-            if(momText.Length - 1 == i)
+            if (ready == false)
             {
-<<<<<<< Updated upstream
-                ready = true;
-=======
                 text.gameObject.SetActive(true);
                 text.text = text.text + momText[i];
                 auds.pitch = UnityEngine.Random.Range(0.8f, 1.2f);
@@ -93,26 +87,19 @@ public class Beginning : MonoBehaviour
                 {
                     ready = true;
                 }
->>>>>>> Stashed changes
             }
         }
 
         yield return new WaitUntil(() => ready == true);
-<<<<<<< Updated upstream
-=======
         text.text = momText;
 
->>>>>>> Stashed changes
         yield return new WaitForSecondsRealtime(3);
         text.text = "";
         text.gameObject.SetActive(false);
         color.a = 0;
         image.GetComponent<Image>().color = color;
-<<<<<<< Updated upstream
-=======
         controller.GetComponent<FirstPersonController>().Frozen(false);
         ready = false;
         resetting = false;
->>>>>>> Stashed changes
     }
 }

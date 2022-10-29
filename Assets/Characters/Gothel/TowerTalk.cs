@@ -34,7 +34,15 @@ public class TowerTalk : MonoBehaviour
 
     int counter2;
 
+    public AudioSource auds;
+
+    public AudioSource madman;
+
+    public AudioClip climbing;
+
     public GameObject epop;
+
+    public MusicChange ms;
     private void Awake()
     {
         Talk.talking += ShowYourself;
@@ -48,6 +56,7 @@ public class TowerTalk : MonoBehaviour
     {
         if(climb)
         {
+            StartCoroutine(ms.ChangeMusicFade("none", 1f));
             time += Time.deltaTime;
         }
         if(time>maxTime && fps.transform.position != transform.position)
@@ -59,6 +68,7 @@ public class TowerTalk : MonoBehaviour
         }
         if(time > maxTime && counter == 0)
         {
+            auds.PlayOneShot(climbing);
             camera.GetComponent<Animator>().enabled = true;
             camera.GetComponent<Animator>().SetBool("climb", true);
             basket.GetComponent<Animator>().enabled = true;
@@ -94,6 +104,7 @@ public class TowerTalk : MonoBehaviour
             staticStuff.runSoured = true;
             hair.SetActive(true);
             hair.GetComponent<Animator>().SetBool("start", true);
+            madman.enabled = false;
             climb = true;
             epop.SetActive(false);
             fps.GetComponent<FirstPersonController>().Frozen(false);

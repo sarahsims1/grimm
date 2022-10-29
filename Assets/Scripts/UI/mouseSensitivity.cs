@@ -9,7 +9,8 @@ public class mouseSensitivity : MonoBehaviour
     public static SensChange sensChange;
     public void AdjustSensitiivty(float newsens)
     {
-        FirstPersonController.mouseSensitivity = newsens;
-        sensChange();
+        MouseLook.XSensitivity = newsens;
+        MouseLook.YSensitivity = newsens;
+        // sensChange.Invoke();
     }
 }

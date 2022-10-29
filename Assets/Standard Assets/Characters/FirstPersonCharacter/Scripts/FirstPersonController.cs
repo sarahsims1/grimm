@@ -25,7 +25,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         [SerializeField] private CurveControlledBob m_HeadBob = new CurveControlledBob();
         [SerializeField] private LerpControlledBob m_JumpBob = new LerpControlledBob();
         [SerializeField] public float m_StepInterval;
-        [SerializeField] private AudioClip[] m_FootstepSounds;    // an array of footstep sounds that will be randomly selected from.
+        [SerializeField] public AudioClip[] m_FootstepSounds;    // an array of footstep sounds that will be randomly selected from.
         [SerializeField] private AudioClip m_JumpSound;           // the sound played when character leaves the ground.
         [SerializeField] private AudioClip m_LandSound;           // the sound played when character touches back on ground.
 
@@ -44,6 +44,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private AudioSource m_AudioSource;
 
         public static bool lightningSpeedActive = false;
+        public static bool superLightningSpeedActive = false;
         public static float mouseSensitivity = 2;
 
         // Use this for initialization
@@ -77,7 +78,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
             else
             {
-                if (lightningSpeedActive) SetRunSpeed(30); else SetRunSpeed(11);
+                if (superLightningSpeedActive) SetRunSpeed(100); else if (lightningSpeedActive) SetRunSpeed(30); else SetRunSpeed(11);
                 SetWalkSpeed(6);
                 MouseLook.YSensitivity = mouseSensitivity;
                 MouseLook.XSensitivity = mouseSensitivity;
@@ -85,7 +86,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         }
         private void Start()
         {
-            if (lightningSpeedActive) SetRunSpeed(30); else SetRunSpeed(11);
+            if (superLightningSpeedActive) SetRunSpeed(100); else if (lightningSpeedActive) SetRunSpeed(30); else SetRunSpeed(11);
             MouseLook.YSensitivity = mouseSensitivity;
             MouseLook.XSensitivity = mouseSensitivity;
             m_CharacterController = GetComponent<CharacterController>();

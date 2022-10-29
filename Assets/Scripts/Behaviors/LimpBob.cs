@@ -20,14 +20,8 @@ public class LimpBob : MonoBehaviour
     {
         regBob.enabled = true;
         limpBob.enabled = false;
-<<<<<<< Updated upstream
-
-        stepmomevent.limpStart += StartTheLimp;
-        Beginning.stopLimp += StopTheLimp;
-=======
    
         Trigger.stopLimp += StopTheLimp;
->>>>>>> Stashed changes
     }
 
     private void Update()

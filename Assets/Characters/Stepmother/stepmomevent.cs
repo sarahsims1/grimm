@@ -35,6 +35,8 @@ public class stepmomevent : MonoBehaviour
     public float fadeTime;
 
     public GameObject epop;
+
+    public MusicChange ms;
     private void Start()
     {
         LimpBob.stepmomActive = true;
@@ -79,6 +81,7 @@ public class stepmomevent : MonoBehaviour
     {
         if (start)
         {
+            StartCoroutine(ms.ChangeMusicFade("none", 1f));
             auds.PlayOneShot(sting);
             stepMom.material = sheGottheClip;
             StartCoroutine(Uhoh());

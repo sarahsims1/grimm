@@ -30,6 +30,12 @@ public class GranWolfTalk : MonoBehaviour
 
     public Image black;
 
+    public AudioSource auds;
+
+    public AudioClip js;
+
+    public GameObject epop;
+
     private void Awake()
     {
         normalMat = granwolf.GetComponent<Renderer>();
@@ -71,8 +77,10 @@ public class GranWolfTalk : MonoBehaviour
     }
     private IEnumerator YouveBeenChomped()
     {
+        epop.SetActive(false);
         yield return new WaitForSecondsRealtime(time);
         start = true;
+        auds.PlayOneShot(js);
         yield return new WaitForSecondsRealtime(0.5f);
         Color color = new Color(0,0,0);
         black.color = color;

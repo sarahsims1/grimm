@@ -18,6 +18,12 @@ public class Trigger : MonoBehaviour
     public delegate void good();
     public static good goodEnd;
 
+    public FirstPersonController fps;
+    public AudioClip fs2;
+    public AudioClip fs3;
+
+    public delegate void LimpCont();
+    public static LimpCont stopLimp;
     private void Start()
     {
         
@@ -41,34 +47,33 @@ public class Trigger : MonoBehaviour
                             EndingManager.whichEnding = 3;
                             Debug.Log("Bad Ending");
                             badEnding.Invoke();
-                            staticStuff.endHasBeenGot = true;
+                            if (staticStuff.endHasBeenGot) staticStuff.twoEndsHaveBeenGot = true;
+                            staticStuff.endHasBeenGot = true;                        
                             break;
                         case 8:
                             Debug.Log("Good Ending");
                             EndingManager.whichEnding = 1;
                             goodEnd.Invoke();
+                            if (staticStuff.endHasBeenGot) staticStuff.twoEndsHaveBeenGot = true;
                             staticStuff.endHasBeenGot = true;
                             break;
                         default:
                             EndingManager.whichEnding = 2;
                             Debug.Log("Normal");
                             normEnd.Invoke();
+                            if (staticStuff.endHasBeenGot) staticStuff.twoEndsHaveBeenGot = true;
                             staticStuff.endHasBeenGot = true;
                             break;
                     }
-                    staticStuff.goodFlags = 0;
-                    staticStuff.badFlags = 0;
                 }
 
                 switch (staticStuff.badFlags + staticStuff.goodFlags)
                 {
                     case 1:
-                        beg.ResetController("Here again, my darling, is your grandmother still not well? Take to her this basket, with a loaf of bread and wine, and let her eat and drink and gain her strength again. " +
-                        "Take care and do not stray off the path, lest mischief follow.");
+                        beg.ResetController("Darling, your grandmother is still sick. Be a dear and visit her agian, will you?");
                         break;
                     case 2:                    
-                        beg.ResetController("Here again, my darling, is your grandmother still not well? Take to her this basket, with a loaf of bread and wine, and let her eat and drink and gain her strength again. " +
-                        "Take care and do not stray off the path, lest mischief follow.");
+                        beg.ResetController("It seems your poor granny is still not well. It's good that you're checking on her every day, she might not be well for a while now.");
                         break;
                     case 3:
                         if (staticStuff.runSoured)
@@ -77,8 +82,7 @@ public class Trigger : MonoBehaviour
                         }
                         else
                         {
-                            beg.ResetController("Here again, my darling, is your grandmother still not well? Take to her this basket, with a loaf of bread and wine, and let her eat and drink and gain her strength again. " +
-                            "Take care and do not stray off the path, lest mischief follow.");
+                            beg.ResetController("Here's this morning's basket, dear. Send your grandma my love.");
                         }
                         break;
                     case 4:
@@ -88,19 +92,20 @@ public class Trigger : MonoBehaviour
                         }
                         else
                         {
-                            beg.ResetController("Here again, my darling, is your grandmother still not well? Take to her this basket, with a loaf of bread and wine, and let her eat and drink and gain her strength again. " +
-                            "Take care and do not stray off the path, lest mischief follow.");
+                            beg.ResetController("You're doing so well to visit your grandma every day. Be sure to stay on the path!");
                         }
                         break;
                     case 5:
                         if (staticStuff.runSoured)
                         {
-                            beg.ResetController("Seems you're lacking a toe, my darling. Surely you didn't s':tr%^aaaa#}'*^y. Oh well, grandmother must have her basket. We'll simply have to replace it. Come here...");
+                            stopLimp();
+                            beg.ResetController("Seems you're lacking a toe, my darling. Surely you didn't s':tr%^aaaa#}'*^y. Oh well, grandmother must have her basket.");
+                            fps.m_FootstepSounds[1] = fs2;
+                            fps.m_FootstepSounds[2] = fs3;
                         }
                         else
                         {
-                            beg.ResetController("Here again, my darling, is your grandmother still not well? Take to her this basket, with a loaf of bread and wine, and let her eat and drink and gain her strength again. " +
-                            "Take care and do not stray off the path, lest mischief follow.");
+                            beg.ResetController("Hurry straight there and back today, love.");
                         }
                         break;
                     case 6:
@@ -110,19 +115,18 @@ public class Trigger : MonoBehaviour
                         }
                         else
                         {
-                            beg.ResetController("Here again, my darling, is your grandmother still not well? Take to her this basket, with a loaf of bread and wine, and let her eat and drink and gain her strength again. " +
-                            "Take care and do not stray off the path, lest mischief follow.");
+                            beg.ResetController("Your granny is growing stronger every day. Hopefully she'll be better soon.");
                         }
                         break;
                     case 7:
                         if (staticStuff.runSoured)
                         {
+                            stopLimp();
                             beg.ResetController("Blind and foolish child.");
                         }
                         else
                         {
-                            beg.ResetController("Here again, my darling, is your grandmother still not well? Take to her this basket, with a loaf of bread and wine, and let her eat and drink and gain her strength again. " +
-                            "Take care and do not stray off the path, lest mischief follow.");
+                            beg.ResetController("Send your grandmother my love today, darling. This is going to be the last time you see her for a while.");
                         }
                         break;
                 }

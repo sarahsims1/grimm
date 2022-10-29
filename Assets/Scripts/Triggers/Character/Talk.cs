@@ -24,6 +24,8 @@ namespace Doublsb.Dialog
         [SerializeField]
         private FirstPersonController fps;
 
+        public MusicChange ms;
+
         //Checks if player is in range
         private bool inRange;
 
@@ -55,6 +57,8 @@ namespace Doublsb.Dialog
             {
                 //This event indicates that the dialog is almost over.
                 DialogManager.DialogFin += Deactivate;
+                //Changes music
+                StartCoroutine(ms.ChangeMusicFade("none", 1f));
                 fps.Frozen(true);
                 character.SetActive(true);
                 dialog.SetActive(true);
@@ -91,6 +95,7 @@ namespace Doublsb.Dialog
                 yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.E));
                 yield return new WaitForSeconds(0.01f);
                 yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.E));
+                StartCoroutine(ms.ChangeMusicFade("same", 1f));
                 fps.Frozen(false);
                 dialogObject.SetActive(false);
                 dialog.SetActive(false);
